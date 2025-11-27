@@ -1,63 +1,131 @@
-body {
-    background: black;
-    overflow: hidden;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: sans-serif;
+:root{
+  /* Planet image sizes (px) — computed from real diameters then clamped.
+     Values chosen to preserve relative scale but remain usable on screen. */
+  --size-mercury: 12px;
+  --size-venus:   12px;
+  --size-earth:   13px;
+  --size-mars:    12px;
+  --size-jupiter: 120px;
+  --size-saturn:  116px;
+  --size-uranus:  51px;
+
+  --bg: #000;
+  --fg: #fff;
+  --muted: rgba(255,255,255,0.08);
 }
 
-.solar-system {
-    position: relative;
-    width: 600px;
-    height: 600px;
-}
+/* Reset & base */
+* { box-sizing: border-box; }
+html,body { height:100%; margin:0; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background: var(--bg); color:var(--fg); }
+a { color:inherit; text-decoration:none; }
 
-.sun {
-    width: 60px;
-    height: 60px;
-    background: radial-gradient(circle, yellow, orange);
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 0 40px yellow;
-}
+/* PRELOAD state: prevent animations before JS sets things up */
+body.preload * { transition:none !important; animation:none !important; }
 
-/* Orbits */
+/* SIDE MENU */
+#menu-toggle {
+  position:fixed; z-index:200; left:18px; top:18px;
+  background:transparent; border:2px solid rgba(255,255,255,0.1); color:var(--fg);
+  padding:8px 10px; border-radius:8px; cursor:pointer;
+  backdrop-filter: blur(6px);
+}
+#side-nav {
+  position:fixed; z-index:190; left:-260px; top:0; width:240px; height:100%;
+  background: rgba(0,0,0,0.85); border-right:1px solid rgba(255,255,255,0.03);
+  padding:48px 16px;
+  transition:left .45s cubic-bezier(.2,.9,.2,1);
+  overflow:auto;
+}
+#side-nav.open { left:0; }
+#side-nav ul { list-style:none; padding:0; margin:0; }
+#side-nav li { margin:12px 0; }
+#side-nav a { color:var(--fg); font-weight:600; display:block; padding:8px 10px; border-radius:6px; }
+#side-nav a:hover { background: rgba(255,255,255,0.03); }
+
+/* INTRO OVERLAY */
+#intro-overlay {
+  position:fixed; inset:0; z-index:400; display:flex; align-items:center; justify-content:center;
+  background:#000; color:#fff; pointer-events:none;
+  transition:opacity .8s ease, transform .6s ease;
+}
+#intro-overlay.fade-out { opacity:0; transform:scale(.995); pointer-events:none; visibility:hidden; }
+
+.intro-center h1 { font-size: clamp(28px, 6vw, 86px); letter-spacing: -0.02em; display:flex; gap:0.4rem; align-items:center; margin:0; }
+
+/* "Sun" middle word should be black with a sun image behind it.
+   We'll use blend/masking by placing a semi-circle sun behind the intro text in HTML via the sun image.
+   To get the black letters showing the sun behind them, we simply color .middle black and put the sun image behind the whole intro-div
+*/
+#intro-overlay .first, #intro-overlay .last { color:white; opacity:0; display:inline-block; }
+#intro-overlay .middle { color:black; background:transparent; opacity:0; display:inline-block; position:relative; padding:0 6px; }
+
+/* typing / entrance timing handled by classes toggled in JS */
+.part { transform: translateY(8px); transition:opacity .35s ease, transform .45s cubic-bezier(.2,.9,.2,1); }
+.part.visible { opacity:1; transform: translateY(0); }
+
+/* SOLAR CONTAINER */
+#main-wrap { min-height:100vh; display:flex; align-items:center; justify-content:center; position:relative; z-index:100; opacity:0; transition:opacity .8s ease; }
+#main-wrap.show { opacity:1; }
+
+/* center area */
+#solar-container { width:100%; height:100vh; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+
+/* Sun */
+#sun-wrap { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:50; filter: drop-shadow(0 12px 24px rgba(0,0,0,0.6)); }
+#sun-img { width:220px; height:220px; object-fit:cover; border-radius:50%; display:block; }
+
+/* ORBITS */
+#orbits { position:relative; width:100%; height:100%; pointer-events:auto; }
+
+/* Generic orbit container centers on sun and rotates */
 .orbit {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform-origin: top left;
-    animation: spin linear infinite;
+  position:absolute; left:50%; top:50%; transform-origin: -50% -50%;
+  width: calc(var(--radius) * 2); height: calc(var(--radius) * 2);
+  margin-left: calc(-1 * var(--radius)); margin-top: calc(-1 * var(--radius));
+  border-radius:50%; display:flex; align-items:center; justify-content:flex-start;
+  opacity:0; transition:opacity .9s ease;
 }
 
-/* Different orbit sizes and speeds */
-.mercury-orbit { width: 120px; height: 120px; animation-duration: 3s; }
-.venus-orbit   { width: 180px; height: 180px; animation-duration: 6s; }
-.earth-orbit   { width: 250px; height: 250px; animation-duration: 10s; }
-.mars-orbit    { width: 320px; height: 320px; animation-duration: 15s; }
-
-/* Planet circles */
-.planet {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
+/* subtle visual orbit lines (muted) */
+.orbit::before {
+  content:""; position:absolute; inset:0; border-radius:50%; border:1px dashed var(--muted); pointer-events:none;
 }
 
-.mercury { background: gray; }
-.venus   { background: tan; }
-.earth   { background: blue; }
-.mars    { background: red; }
+/* planet anchor placed on orbit edge (to the right) */
+.planet { position:relative; display:block; transform: translate(0, -50%); margin-left: calc(var(--radius) - 0px); width:auto; height:auto; }
 
-/* Rotation */
-@keyframes spin {
-    from { transform: rotate(0deg); }
-    to   { transform: rotate(360deg); }
+/* planet images sized from variables */
+.planet img { display:block; border-radius:50%; object-fit:cover; box-shadow: 0 6px 18px rgba(0,0,0,0.6); }
+
+/* per-planet sizes */
+.planet.mercury img { width: var(--size-mercury); height: var(--size-mercury); }
+.planet.venus img   { width: var(--size-venus);   height: var(--size-venus); }
+.planet.earth img   { width: var(--size-earth);   height: var(--size-earth); }
+.planet.mars img    { width: var(--size-mars);    height: var(--size-mars); }
+.planet.jupiter img { width: var(--size-jupiter); height: var(--size-jupiter); }
+.planet.saturn img  { width: var(--size-saturn);  height: var(--size-saturn); }
+.planet.uranus img  { width: var(--size-uranus);  height: var(--size-uranus); }
+
+/* show orbits after intro */
+.orbit.show { opacity:1; }
+
+/* rotation animation applied when .orbit.rotate added by JS; rotation is around the center */
+@keyframes orbit-rotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
+.orbit.rotate { animation-name: orbit-rotate; animation-timing-function: linear; animation-iteration-count: infinite; }
+
+/* fade out body while navigating */
+.fade-out-page { opacity:0 !important; transition:opacity .6s ease; }
+
+/* responsive adjustments */
+@media (max-width:900px){
+  #sun-img { width:160px; height:160px; }
+  :root { --size-jupiter: 84px; --size-saturn:78px; --size-uranus:36px; }
+  .orbit { display:none; } /* simplify on small screens: hide large orbits, you can adjust */
+  #orbits { transform: translateY(40px); }
+}
+
+/* give focus styles for accessibility */
+#menu-toggle:focus, #side-nav a:focus, .planet:focus { outline: 3px solid rgba(255,255,255,0.08); outline-offset:2px; border-radius:6px; }

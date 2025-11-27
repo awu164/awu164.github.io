@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Neptune — Alicia Sun Wu</title>
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    /* page-specific overrides for the content area */
+    body { background:#000; color:#fff; }
+    .page { min-height:100vh; padding:48px; display:flex; align-items:flex-start; gap:28px; }
+    .panel { max-width:860px; }
+    .planet-hero { width:140px; height:140px; border-radius:50%; overflow:hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.7); }
+    /* fade-in for subpage body (so transition from homepage dissolves into this) */
+    body { opacity:0; animation:pageFadeIn .6s forwards; }
+    @keyframes pageFadeIn { to { opacity:1; } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="panel">
+      <h1>Neptune</h1>
+      <p>A short intro paragraph about Neptune. Replace this with the content you'd like for this subpage.</p>
+
+      <p><a href="../index.html" class="back-link">← Back to home</a></p>
+    </div>
+    <aside>
+      <div class="planet-hero">
+        <img src="../assets/neptune.png" alt="Neptune" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+    </aside>
+  </main>
+
+  <script>
+    // When users click links to other pages from subpages, use fade-out navigation to match the dissolve pattern.
+    (function(){
+      const fadeOutThen = (href) => {
+        document.body.style.transition = 'opacity .6s ease';
+        document.body.style.opacity = '0';
+        setTimeout(()=> location.href = href, 620);
+      };
+      document.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', (e) => {
+          // allow external links and ctrl/cmd click behavior
+          if (a.href && !a.href.startsWith('http') || a.origin === location.origin) {
+            e.preventDefault();
+            fadeOutThen(a.href);
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
