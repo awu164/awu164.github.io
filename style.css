@@ -95,16 +95,24 @@ body.preload * { transition:none !important; animation:none !important; }
 .planet { position:relative; display:block; transform: translate(0, -50%); margin-left: calc(var(--radius) - 0px); width:auto; height:auto; }
 
 /* planet images sized from variables */
-.planet img { display:block; border-radius:50%; object-fit:cover; box-shadow: 0 6px 18px rgba(0,0,0,0.6); }
+.planet img { 
+  display:block; 
+  border-radius:50%; 
+  object-fit:cover; 
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+  /* force sizing through a single variable */
+  width: var(--size);
+  height: var(--size);
+}
 
-/* per-planet sizes */
-.planet.mercury img { width: var(--size-mercury); height: var(--size-mercury); }
-.planet.venus img   { width: var(--size-venus);   height: var(--size-venus); }
-.planet.earth img   { width: var(--size-earth);   height: var(--size-earth); }
-.planet.mars img    { width: var(--size-mars);    height: var(--size-mars); }
-.planet.jupiter img { width: var(--size-jupiter); height: var(--size-jupiter); }
-.planet.saturn img  { width: var(--size-saturn);  height: var(--size-saturn); }
-.planet.uranus img  { width: var(--size-uranus);  height: var(--size-uranus); }
+/* assign per-planet sizes via data-planet */
+.planet[data-planet="mercury"] { --size: var(--size-mercury); }
+.planet[data-planet="venus"]   { --size: var(--size-venus); }
+.planet[data-planet="earth"]   { --size: var(--size-earth); }
+.planet[data-planet="mars"]    { --size: var(--size-mars); }
+.planet[data-planet="jupiter"] { --size: var(--size-jupiter); }
+.planet[data-planet="saturn"]  { --size: var(--size-saturn); }
+.planet[data-planet="uranus"]  { --size: var(--size-uranus); }
 
 /* show orbits after intro */
 .orbit.show { opacity:1; }
@@ -122,7 +130,11 @@ body.preload * { transition:none !important; animation:none !important; }
 /* responsive adjustments */
 @media (max-width:900px){
   #sun-img { width:160px; height:160px; }
-  :root { --size-jupiter: 84px; --size-saturn:78px; --size-uranus:36px; }
+  :root { 
+    --size-jupiter: 84px; 
+    --size-saturn: 78px; 
+    --size-uranus: 36px; 
+  }
   .orbit { display:none; } /* simplify on small screens: hide large orbits, you can adjust */
   #orbits { transform: translateY(40px); }
 }
