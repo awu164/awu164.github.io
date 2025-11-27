@@ -1,0 +1,63 @@
+body {
+    background: black;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+}
+
+.solar-system {
+    position: relative;
+    width: 600px;
+    height: 600px;
+}
+
+.sun {
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, yellow, orange);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 40px yellow;
+}
+
+/* Orbits */
+.orbit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: top left;
+    animation: spin linear infinite;
+}
+
+/* Different orbit sizes and speeds */
+.mercury-orbit { width: 120px; height: 120px; animation-duration: 3s; }
+.venus-orbit   { width: 180px; height: 180px; animation-duration: 6s; }
+.earth-orbit   { width: 250px; height: 250px; animation-duration: 10s; }
+.mars-orbit    { width: 320px; height: 320px; animation-duration: 15s; }
+
+/* Planet circles */
+.planet {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+.mercury { background: gray; }
+.venus   { background: tan; }
+.earth   { background: blue; }
+.mars    { background: red; }
+
+/* Rotation */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
