@@ -11,7 +11,7 @@
 
   --bg: #000;
   --fg: #fff;
-  --muted: rgba(255,255,255,0.08);
+  --muted: rgba(255, 255, 255, 0.4);
   --intro-offset-x: -60px; /* negative = shift left, positive = shift right */
 
   --sun-glow-core: rgba(255,205,90,0.85);
@@ -304,7 +304,7 @@ body.preload * {
   position:absolute; 
   inset:0; 
   border-radius:50%; 
-  border:2.5px solid var(--muted); 
+  border:2px solid var(--muted); 
 }
 
 /* planet anchor placed on orbit edge (to the right) */
