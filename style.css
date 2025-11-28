@@ -137,27 +137,33 @@ body.preload * {
     margin:0; 
 }
 
-/* "Sun" middle word should be black with a sun image behind it.
-   We'll use blend/masking by placing a semi-circle sun behind the intro text in HTML via the sun image.
-   To get the black letters showing the sun behind them, we simply color .middle black and put the sun image behind the whole intro-div
-*/
+/* "Sun" middle word should be black with a sun image behind it. */
+/* Remove opacity here to avoid specificity conflicts */
 #intro-overlay .first, 
 #intro-overlay .last { 
     color:white; 
-    opacity:0; 
     display:inline-block; 
-    
 }
 
 #intro-overlay .middle { 
     color:black; 
     background:transparent; 
-    opacity:0; 
     display:inline-block; 
     position:relative; 
     padding:0 6px; 
 }
 
+/* typing / entrance timing handled by classes toggled in JS */
+.part { 
+    /* set initial opacity at low specificity */
+    opacity: 0;
+    transform: translateY(8px); 
+    transition:opacity .35s ease, transform .45s cubic-bezier(.2,.9,.2,1); 
+}
+.part.visible { 
+    opacity:1; 
+    transform: translateY(0); 
+}
 
 /* SOLAR CONTAINER */
 #main-wrap { 
