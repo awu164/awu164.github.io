@@ -259,11 +259,11 @@ body.preload * {
     display:block; 
     pointer-events: none;
 
-    box-shadow:
+    /*box-shadow:
     0 0 18px 6px rgba(255, 96, 60, 0.55),
     0 0 48px 18px rgba(255, 101, 40, 0.259),
     0 0 110px 42px rgba(255, 55, 20, 0.2),
-    0 0 160px 90px rgba(255, 47, 20, 0.055);
+    0 0 160px 90px rgba(255, 47, 20, 0.055); */
 }
 
 @keyframes sun-glow-pulse {
@@ -308,7 +308,7 @@ body.preload * {
   position:absolute; 
   inset:0; 
   border-radius:50%; 
-  border:1.5px solid var(--muted); 
+  border: 1px solid var(--muted); 
 }
 
 /* planet anchor placed on orbit edge (to the right) */
