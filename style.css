@@ -155,7 +155,7 @@ body.preload * {
     background:transparent; 
     display:inline-block; 
     position:relative; 
-    padding:0 6px; 
+    padding:0 10px; 
 }
 
 /* typing / entrance timing handled by classes toggled in JS */
@@ -309,7 +309,7 @@ body.preload * {
   position:absolute; 
   inset:0; 
   border-radius:50%; 
-  border: 1px solid var(--muted); 
+  border: 1.25px solid var(--muted); 
 }
 
 /* planet anchor placed on orbit edge (to the right) */
