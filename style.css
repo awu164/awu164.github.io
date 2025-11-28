@@ -207,6 +207,7 @@ body.preload * {
     transform:translate(-50%,-50%); 
     z-index: 500; /* above #intro-overlay (z-index:400) */
     filter: drop-shadow(0 12px 24px rgba(0,0,0,0.6)); 
+    pointer-events: none;
 }
 
 #sun-img { 
