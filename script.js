@@ -16,7 +16,7 @@
   const sideNav = $('#side-nav');
 
   // After DOM loaded, remove preload so CSS animations run
-  window.addEventListener('load', () => {
+  window.addEventListener('DOMContentLoaded', () => {
     body.classList.remove('preload');
 
     // Start intro animation sequence
@@ -25,6 +25,16 @@
     setupPlanetNavigation();
     setupNavLinks();
   });
+  // (Optional) keep 'load' in case you rely on it elsewhere; not needed for intro.
+  /*window.addEventListener('load', () => {
+    body.classList.remove('preload');
+
+    // Start intro animation sequence
+    runIntroSequence();
+    setupMenuToggle();
+    setupPlanetNavigation();
+    setupNavLinks();
+  });*/
 
   // --- INTRO SEQUENCE ---
   function runIntroSequence(){
