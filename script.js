@@ -77,6 +77,13 @@
         orbit.classList.add('show');
         const dur = getComputedStyle(orbit).getPropertyValue('--duration') || '20s';
         orbit.style.animationDuration = ('' + dur).trim();
+        if (!animationStopped) {
+          orbit.classList.add('rotate');
+          orbit.style.animationPlayState = 'running';
+        } else {
+          orbit.classList.remove('rotate');
+          orbit.style.animationPlayState = 'paused';
+        }
       }, 350 * i + 250);
     });
   }
@@ -85,12 +92,12 @@
     orbits.forEach(orbit => {
       if (animationStopped) {
         // pause
-        //orbit.classList.remove('rotate');
+        orbit.classList.remove('rotate');
         orbit.style.animationPlayState = 'paused';
       } else {
         // resume
         if (orbit.classList.contains('show')) {
-          //orbit.classList.add('rotate');
+          orbit.classList.add('rotate');
           orbit.style.animationPlayState = 'running';
         }
       }
