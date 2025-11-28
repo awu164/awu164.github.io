@@ -155,7 +155,7 @@ body.preload * {
     background:transparent; 
     display:inline-block; 
     position:relative; 
-    padding:0 20px; /* was 10px — adjust higher to increase separation */
+    padding:0 30px; /* to increase separation between the words */
 }
 
 /* typing / entrance timing handled by classes toggled in JS */
@@ -174,7 +174,7 @@ body.preload * {
 .part.out {
     opacity: 0;
     transform: translateY(-6px);
-    transition: opacity 1.5s ease, transform 1.5s ease; /* faster exit */
+    transition: opacity 1.5s ease, transform 1.5s ease; 
 }
 
 /* SOLAR SYSTEM CONTAINER */
@@ -247,13 +247,13 @@ body.preload * {
   filter: blur(22px);
   z-index:-1;
   pointer-events:none;
-  animation: sun-glow-pulse 7s ease-in-out infinite;
+  animation: sun-glow-pulse 5s ease-in-out infinite;
   opacity:0.9;
 }
 
 @keyframes sun-glow-pulse {
   0%   { transform: scale(1);   opacity:0.90; }
-  50%  { transform: scale(1.25); opacity:0.60; }
+  50%  { transform: scale(1.5); opacity:0.60; }
   100% { transform: scale(1);   opacity:0.90; }
 }
 
