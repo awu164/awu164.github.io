@@ -205,7 +205,7 @@ body.preload * {
     left:50%; 
     top:50%; 
     transform:translate(-50%,-50%); 
-    z-index: 500; /* above #intro-overlay (z-index:400) */
+    z-index: 50; /* above #intro-overlay (z-index:400) */
     filter: drop-shadow(0 12px 24px rgba(0,0,0,0.6)); 
     pointer-events: none;
 }
@@ -229,6 +229,7 @@ body.preload * {
     width:100%; 
     height:100%; 
     pointer-events:auto; 
+    z-index: 101;
 }
 
 /* Generic orbit container centers on sun and rotates */
