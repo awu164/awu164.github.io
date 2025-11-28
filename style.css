@@ -118,7 +118,7 @@ body.preload * {
   justify-content:center;
   background: transparent; /* was black; keeps sun visible during intro */
   color:#fff; 
-  pointer-events:none;
+  pointer-events:auto; /* was none; needed for stop button */
   transition:opacity .8s ease, transform .6s ease;
 }
 
@@ -186,6 +186,20 @@ body.preload * {
 
 #main-wrap.show { 
     opacity:1; 
+}
+
+#animation-button {
+    position:fixed; 
+    z-index:200; 
+    right:18px; 
+    top:18px;
+    background:transparent; 
+    border:2px solid rgba(255,255,255,0.1); 
+    color:var(--fg);
+    padding:8px 10px; 
+    border-radius:8px; 
+    cursor:pointer;
+    backdrop-filter: blur(6px);
 }
 
 /* center area */
@@ -268,7 +282,6 @@ body.preload * {
   width:auto; 
   height:auto; 
   margin:0; /* remove margin-left based positioning */
-  /*pointer-events: auto; */
 }
 
 /* planet images sized from variables */

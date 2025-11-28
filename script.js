@@ -14,6 +14,9 @@
   const orbits = $$('.orbit');
   const menuToggle = $('#menu-toggle');
   const sideNav = $('#side-nav');
+  const stopBtn = document.getElementById('stop-animation');
+
+  let animationStopped = false;
 
   // After DOM loaded, remove preload so CSS animations run
   window.addEventListener('DOMContentLoaded', () => {
@@ -24,6 +27,7 @@
     setupMenuToggle();
     setupPlanetNavigation();
     setupNavLinks();
+    setupStopButton();
   });
   // (Optional) keep 'load' in case you rely on it elsewhere; not needed for intro.
   /*window.addEventListener('load', () => {
@@ -71,13 +75,35 @@
     orbits.forEach((orbit, i) => {
       setTimeout(() => {
         orbit.classList.add('show');
-        // read duration from inline style var --duration (fallback)
         const dur = getComputedStyle(orbit).getPropertyValue('--duration') || '20s';
-        const numeric = ('' + dur).trim();
-        orbit.style.animationDuration = numeric;
-        orbit.classList.add('rotate');
+        orbit.style.animationDuration = ('' + dur).trim();
+        if (!animationStopped) {
+          orbit.classList.add('rotate');
+          orbit.style.animationPlayState = 'running';
+        } else {
+          orbit.classList.remove('rotate');
+          orbit.style.animationPlayState = 'paused';
+        }
       }, 350 * i + 250);
     });
+  }
+
+  function updateAnimationState(){
+    orbits.forEach(orbit => {
+      if (animationStopped) {
+        // pause
+        orbit.classList.remove('rotate');
+        orbit.style.animationPlayState = 'paused';
+      } else {
+        // resume
+        if (orbit.classList.contains('show')) {
+          orbit.classList.add('rotate');
+          orbit.style.animationPlayState = 'running';
+        }
+      }
+    });
+    stopBtn.textContent = animationStopped ? 'Start Animation' : 'Stop Animation';
+    stopBtn.setAttribute('aria-pressed', animationStopped ? 'true' : 'false');
   }
 
   // --- MENU TOGGLE ---
@@ -143,5 +169,13 @@
       }
     }
   });
+
+  function setupStopButton(){
+    if (!stopBtn) return;
+    stopBtn.addEventListener('click', () => {
+      animationStopped = !animationStopped;
+      updateAnimationState();
+    });
+  }
 
 })();
