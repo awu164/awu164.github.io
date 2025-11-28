@@ -303,7 +303,7 @@ body.preload * {
   position:absolute; 
   inset:0; 
   border-radius:50%; 
-  border:3px dashed var(--muted); 
+  border:10px dashed var(--muted); 
 }
 
 /* planet anchor placed on orbit edge (to the right) */
