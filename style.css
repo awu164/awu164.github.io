@@ -1,13 +1,13 @@
 :root{
   /* Planet image sizes (px) — computed from real diameters then clamped.
      Values chosen to preserve relative scale but remain usable on screen. */
-  --size-mercury: 12px;
-  --size-venus:   12px;
-  --size-earth:   13px;
-  --size-mars:    12px;
-  --size-jupiter: 120px;
-  --size-saturn:  116px;
-  --size-uranus:  51px;
+  --size-mercury: 24px;
+  --size-venus:   24px;
+  --size-earth:   26px;
+  --size-mars:    24px;
+  --size-jupiter: 60px;
+  --size-saturn:  60px;
+  --size-uranus:  50px;
 
   --bg: #000;
   --fg: #fff;
@@ -21,6 +21,8 @@ a { color:inherit; text-decoration:none; }
 
 /* PRELOAD state: prevent animations before JS sets things up */
 body.preload * { transition:none !important; animation:none !important; }
+
+
 
 /* SIDE MENU */
 #menu-toggle {
@@ -41,6 +43,9 @@ body.preload * { transition:none !important; animation:none !important; }
 #side-nav li { margin:12px 0; }
 #side-nav a { color:var(--fg); font-weight:600; display:block; padding:8px 10px; border-radius:6px; }
 #side-nav a:hover { background: rgba(255,255,255,0.03); }
+
+
+
 
 /* INTRO OVERLAY */
 #intro-overlay {
@@ -63,6 +68,9 @@ body.preload * { transition:none !important; animation:none !important; }
 .part { transform: translateY(8px); transition:opacity .35s ease, transform .45s cubic-bezier(.2,.9,.2,1); }
 .part.visible { opacity:1; transform: translateY(0); }
 
+
+
+
 /* SOLAR CONTAINER */
 #main-wrap { min-height:100vh; display:flex; align-items:center; justify-content:center; position:relative; z-index:100; opacity:0; transition:opacity .8s ease; }
 #main-wrap.show { opacity:1; }
@@ -73,6 +81,10 @@ body.preload * { transition:none !important; animation:none !important; }
 /* Sun */
 #sun-wrap { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:50; filter: drop-shadow(0 12px 24px rgba(0,0,0,0.6)); }
 #sun-img { width:220px; height:220px; object-fit:cover; border-radius:50%; display:block; }
+
+
+
+
 
 /* ORBITS */
 #orbits { position:relative; width:100%; height:100%; pointer-events:auto; }
