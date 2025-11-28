@@ -92,17 +92,21 @@ body.preload * {
     background: rgba(255,255,255,0.03); 
 }
 
-/* place the intro sun centered behind the title */
-.intro-sun {
+/* place the intro sun centered behind the title (inside overlay) */
+#intro-overlay .intro-sun {
   position:absolute;
   left:50%;
   top:50%;
   transform:translate(-50%,-50%);
   width:220px; height:220px; border-radius:50%;
   filter: drop-shadow(0 12px 24px rgba(0,0,0,0.6));
-  z-index:1; /* behind the text */
+  z-index:1; /* behind text (z-index:2) but visible above overlay background */
 }
-
+#intro-overlay .intro-center {
+  position:relative;
+  z-index:2; /* ensure text is above the intro sun image */
+  transform: translateX(var(--intro-offset-x)); /* shift text to match sun */
+}
 
 /* INTRO OVERLAY */
 #intro-overlay {
@@ -153,26 +157,6 @@ body.preload * {
     position:relative; 
     padding:0 6px; 
 }
-
-
-#intro-overlay .intro-center { 
-  position:relative; 
-  z-index:2; /* ensure text is above the sun image */
-  transform: translateX(var(--intro-offset-x)); /* shift text to match sun */
-}
-
-/* typing / entrance timing handled by classes toggled in JS */
-.part { 
-    transform: translateY(8px); 
-    transition:opacity .35s ease, transform .45s cubic-bezier(.2,.9,.2,1); 
-}
-
-.part.visible { 
-    opacity:1; 
-    transform: translateY(0); 
-}
-
-
 
 
 /* SOLAR CONTAINER */

@@ -21,11 +21,10 @@
     </ul>
   </nav>
 
-  <!-- add sun image behind the title during intro -->
-  <img class="intro-sun" src="assets/sun.png" alt="Sun" aria-hidden="true" />
-  
   <!-- INTRO (full-screen black overlay with typed name) -->
   <div id="intro-overlay" aria-hidden="false">
+    <!-- intro sun belongs inside overlay to be visible above the black background -->
+    <img class="intro-sun" src="assets/sun.png" alt="Sun" aria-hidden="true" />
     <div class="intro-center">
       <h1 id="intro-title" aria-hidden="true">
         <span class="part first">Alicia</span>
@@ -38,31 +37,36 @@
   <!-- MAIN SOLAR SYSTEM -->
   <main id="main-wrap" aria-hidden="true">
     <section id="solar-container">
+      <!-- restore the main sun so it remains after the intro overlay fades -->
+      <div id="sun-wrap">
+        <img id="sun-img" src="assets/sun.png" alt="Sun" />
+      </div>
+
       <!-- Orbits and planets. Each .orbit centers a planet at its radius and rotates the orbit. -->
       <div id="orbits">
         <!-- Mercury -->
-        <div class="orbit orbit-1" style="--radius: 90px; --duration: 6s;">
+        <div class="orbit orbit-1" style="--radius: 140px; --duration: 6s;">
           <a class="planet mercury" href="pages/mercury.html" title="Mercury" data-planet="mercury">
             <img src="assets/mercury.png" alt="Mercury">
           </a>
         </div>
 
         <!-- Venus -->
-        <div class="orbit orbit-2" style="--radius: 130px; --duration: 9s;">
+        <div class="orbit orbit-2" style="--radius: 175px; --duration: 9s;">
           <a class="planet venus" href="pages/venus.html" title="Venus" data-planet="venus">
             <img src="assets/venus.png" alt="Venus">
           </a>
         </div>
 
         <!-- Earth -->
-        <div class="orbit orbit-3" style="--radius: 180px; --duration: 12s;">
+        <div class="orbit orbit-3" style="--radius: 210px; --duration: 12s;">
           <a class="planet earth" href="pages/earth.html" title="Earth" data-planet="earth">
             <img src="assets/earth.png" alt="Earth">
           </a>
         </div>
 
         <!-- Mars -->
-        <div class="orbit orbit-4" style="--radius: 230px; --duration: 18s;">
+        <div class="orbit orbit-4" style="--radius: 240px; --duration: 18s;">
           <a class="planet mars" href="pages/mars.html" title="Mars" data-planet="mars">
             <img src="assets/mars.png" alt="Mars">
           </a>
