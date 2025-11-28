@@ -14,9 +14,8 @@
   const orbits = $$('.orbit');
   const menuToggle = $('#menu-toggle');
   const sideNav = $('#side-nav');
-  const stopBtn = $('#animation-button');
-
-  let animationStopped = false;
+  const animBtn = document.getElementById('animation-button');
+  let animationsPaused = false;
 
   // After DOM loaded, remove preload so CSS animations run
   window.addEventListener('DOMContentLoaded', () => {
@@ -27,7 +26,7 @@
     setupMenuToggle();
     setupPlanetNavigation();
     setupNavLinks();
-    setupStopButton();
+    setupAnimationToggle(); // enable pause/resume
   });
   // (Optional) keep 'load' in case you rely on it elsewhere; not needed for intro.
   /*window.addEventListener('load', () => {
@@ -76,43 +75,37 @@
       setTimeout(() => {
         orbit.classList.add('show');
         const dur = getComputedStyle(orbit).getPropertyValue('--duration') || '20s';
-        orbit.style.animationDuration = ('' + dur).trim();
-        if (!animationStopped) {
-          orbit.classList.add('rotate');
-          orbit.style.animationPlayState = 'running';
-        } else {
-          orbit.classList.remove('rotate');
-          orbit.style.animationPlayState = 'paused';
-        }
+        const numeric = ('' + dur).trim();
+        orbit.style.animationDuration = numeric;
+        orbit.classList.add('rotate');
+        // do not restart animation; just set play state
+        orbit.style.animationPlayState = animationsPaused ? 'paused' : 'running';
       }, 350 * i + 250);
+    });
+  }
+
+  // --- ANIMATION TOGGLE BUTTON ---
+  function setupAnimationToggle(){
+    if (!animBtn) return;
+    // initialize label
+    updateAnimBtnLabel();
+    animBtn.addEventListener('click', () => {
+      animationsPaused = !animationsPaused;
+      updateAnimationState();
+      updateAnimBtnLabel();
     });
   }
 
   function updateAnimationState(){
     orbits.forEach(orbit => {
-      if (animationStopped) {
-        // pause
-        orbit.classList.remove('rotate');
-        orbit.style.animationPlayState = 'paused';
-      } else {
-        // resume
-        if (orbit.classList.contains('show')) {
-          orbit.classList.add('rotate');
-          orbit.style.animationPlayState = 'running';
-        }
-      }
+      // keep .rotate so progress is preserved; only change play state
+      orbit.style.animationPlayState = animationsPaused ? 'paused' : 'running';
     });
-    stopBtn.textContent = animationStopped ? 'Start Animation' : 'Stop Animation';
-    stopBtn.setAttribute('aria-pressed', animationStopped ? 'true' : 'false');
   }
 
-  // --- ANIMATION STOP BUTTON ---
-  function setupStopButton(){
-    if (!stopBtn) return;
-    stopBtn.addEventListener('click', () => {
-      animationStopped = !animationStopped;
-      updateAnimationState();
-    });
+  function updateAnimBtnLabel(){
+    animBtn.textContent = animationsPaused ? 'Start Animation' : 'Stop Animation';
+    animBtn.setAttribute('aria-pressed', String(animationsPaused));
   }
 
   // --- MENU TOGGLE ---
