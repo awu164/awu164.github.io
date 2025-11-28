@@ -130,14 +130,14 @@ body.preload * {
 #intro-overlay .first, 
 #intro-overlay .last { 
     color:white; 
-    opacity:0; 
+    opacity:1; 
     display:inline-block; 
 }
 
 #intro-overlay .middle { 
     color:black; 
     background:transparent; 
-    opacity:0; 
+    opacity:1; 
     display:inline-block; 
     position:relative; 
     padding:0 6px; 
