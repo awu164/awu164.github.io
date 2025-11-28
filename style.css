@@ -172,7 +172,7 @@ body.preload * {
     transition: opacity 1.5s ease, transform 1.5s ease; /* faster exit */
 }
 
-/* SOLAR CONTAINER */
+/* SOLAR SYSTEM CONTAINER */
 #main-wrap { 
     min-height:100vh; 
     display:flex; 
@@ -197,6 +197,7 @@ body.preload * {
     justify-content:center; 
     position:relative; 
     overflow:hidden; 
+    pointer-events: none;
 }
 
 /* Sun */
@@ -207,6 +208,7 @@ body.preload * {
     transform:translate(-50%,-50%); 
     z-index: 500; /* above #intro-overlay (z-index:400) */
     filter: drop-shadow(0 12px 24px rgba(0,0,0,0.6)); 
+    pointer-events: none;
 }
 
 #sun-img { 
@@ -227,7 +229,7 @@ body.preload * {
     position:relative; 
     width:100%; 
     height:100%; 
-    pointer-events:none; 
+    pointer-events:auto; 
 }
 
 /* Generic orbit container centers on sun and rotates */
@@ -245,6 +247,7 @@ body.preload * {
   display:block; /* no need for flex for positioning the planet */
   opacity:0; 
   transition:opacity .9s ease;
+  pointer-events: none;
 }
 
 /* subtle visual orbit lines (muted) */
@@ -254,7 +257,6 @@ body.preload * {
   inset:0; 
   border-radius:50%; 
   border:1px dashed var(--muted); 
-  pointer-events:none;
 }
 
 /* planet anchor placed on orbit edge (to the right) */
@@ -266,6 +268,7 @@ body.preload * {
   width:auto; 
   height:auto; 
   margin:0; /* remove margin-left based positioning */
+  pointer-events: auto;
 }
 
 /* planet images sized from variables */
@@ -277,6 +280,7 @@ body.preload * {
   /* force sizing through a single variable */
   width: var(--size);
   height: var(--size);
+  pointer-events: auto;
 }
 
 /* assign per-planet sizes via data-planet */
