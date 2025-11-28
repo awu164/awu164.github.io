@@ -131,7 +131,7 @@ body.preload * {
 #intro-overlay .first, 
 #intro-overlay .last { 
     color:white; 
-    opacity:1; 
+    opacity:0; 
     display:inline-block; 
     
 }
@@ -139,7 +139,7 @@ body.preload * {
 #intro-overlay .middle { 
     color:black; 
     background:transparent; 
-    opacity:1; 
+    opacity:0; 
     display:inline-block; 
     position:relative; 
     padding:0 6px; 
