@@ -180,7 +180,7 @@ body.preload * {
     justify-content:center; 
     position:relative; 
     z-index:100; 
-    opacity:0; 
+    opacity:1; 
     transition:opacity .8s ease; 
 }
 
