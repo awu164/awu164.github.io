@@ -155,7 +155,7 @@ body.preload * {
     background:transparent; 
     display:inline-block; 
     position:relative; 
-    padding:0 10px; 
+    padding:0 20px; /* was 10px — adjust higher to increase separation */
 }
 
 /* typing / entrance timing handled by classes toggled in JS */
@@ -225,7 +225,7 @@ body.preload * {
     left:50%; 
     top:50%; 
     transform:translate(-50%,-50%); 
-    z-index: 500; /* above #intro-overlay (z-index:400) */
+    z-index: 300; /* under #intro-overlay */
     filter: drop-shadow(0 12px 24px rgba(0,0,0,0.6)); 
     pointer-events: none;
 }
@@ -265,11 +265,11 @@ body.preload * {
     display:block; 
     pointer-events: none;
 
-    /*box-shadow:
-    0 0 18px 6px rgba(255, 96, 60, 0.55),
-    0 0 48px 18px rgba(255, 101, 40, 0.259),
-    0 0 110px 42px rgba(255, 55, 20, 0.2),
-    0 0 160px 90px rgba(255, 47, 20, 0.055); */
+    box-shadow:
+    0 0 18px 6px var(--sun-glow-core),
+    0 0 48px 18px var(--sun-glow-mid),
+    0 0 110px 42px var(--sun-glow-fade),
+    0 0 160px 90px var(--sun-glow-extrafade); 
 }
 
 
