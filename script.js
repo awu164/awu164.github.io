@@ -60,7 +60,7 @@
           introOverlay.style.display = 'none';
           revealMain();
         }, 700);
-      }, 150);
+      }, 1000);
     }, totalIntro);
   }
 
