@@ -14,7 +14,7 @@
   const orbits = $$('.orbit');
   const menuToggle = $('#menu-toggle');
   const sideNav = $('#side-nav');
-  const stopBtn = document.getElementById('stop-animation');
+  const stopBtn = $('#animation-button');
 
   let animationStopped = false;
 
