@@ -12,7 +12,7 @@
   --bg: #000;
   --fg: #fff;
   --muted: rgba(255,255,255,0.08);
-  --intro-offset-x: -30px; /* negative = shift left, positive = shift right */
+  --intro-offset-x: -50px; /* negative = shift left, positive = shift right */
 }
 
 /* Reset & base */
