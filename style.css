@@ -12,7 +12,7 @@
   --bg: #000;
   --fg: #fff;
   --muted: rgba(255,255,255,0.08);
-  --intro-offset-x: -20px; /* negative = shift left, positive = shift right */
+  --intro-offset-x: -30px; /* negative = shift left, positive = shift right */
 }
 
 /* Reset & base */
@@ -117,7 +117,7 @@ body.preload * {
 }
 
 .intro-center h1 { 
-    font-size: clamp(40px, 6vw, 86px); 
+    font-size: clamp(56px, 8vw, 120px); /* increased min, vw scaling, and max */
     letter-spacing: -0.02em; 
     display:flex; gap:0.4rem; 
     align-items:center; 
