@@ -92,7 +92,16 @@ body.preload * {
     background: rgba(255,255,255,0.03); 
 }
 
-
+/* place the intro sun centered behind the title */
+.intro-sun {
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:220px; height:220px; border-radius:50%;
+  filter: drop-shadow(0 12px 24px rgba(0,0,0,0.6));
+  z-index:1; /* behind the text */
+}
 
 
 /* INTRO OVERLAY */
@@ -145,16 +154,7 @@ body.preload * {
     padding:0 6px; 
 }
 
-/* place the intro sun centered behind the title */
-#intro-overlay .intro-sun {
-  position:absolute;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  width:220px; height:220px; border-radius:50%;
-  filter: drop-shadow(0 12px 24px rgba(0,0,0,0.6));
-  z-index:1; /* behind the text */
-}
+
 #intro-overlay .intro-center { 
   position:relative; 
   z-index:2; /* ensure text is above the sun image */
