@@ -48,13 +48,16 @@
     // Step 2: keep visible, then fade parts out while keeping sun image behind
     const totalIntro = 3800;
     setTimeout(() => {
-      // fade out intro overlay smoothly
-      introOverlay.classList.add('fade-out');
-      // reveal main content (sun + planets) after overlay fades
+      // fade letters out first
+      introParts.forEach(el => el.classList.add('out'));
+      // small delay so letter fade starts, then fade the overlay
       setTimeout(() => {
-        introOverlay.style.display = 'none';
-        revealMain();
-      }, 700);
+        introOverlay.classList.add('fade-out');
+        setTimeout(() => {
+          introOverlay.style.display = 'none';
+          revealMain();
+        }, 700);
+      }, 150);
     }, totalIntro);
   }
 

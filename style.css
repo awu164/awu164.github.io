@@ -116,7 +116,7 @@ body.preload * {
   display:flex; 
   align-items:center; 
   justify-content:center;
-  background:#000; 
+  background: transparent; /* was black; keeps sun visible during intro */
   color:#fff; 
   pointer-events:none;
   transition:opacity .8s ease, transform .6s ease;
@@ -158,11 +158,18 @@ body.preload * {
     /* set initial opacity at low specificity */
     opacity: 0;
     transform: translateY(8px); 
-    transition:opacity .35s ease, transform .45s cubic-bezier(.2,.9,.2,1); 
+    transition:opacity 0.7s ease, transform 0.9s cubic-bezier(.2,.9,.2,1); 
 }
 .part.visible { 
     opacity:1; 
     transform: translateY(0); 
+}
+
+/* fade-out state when exiting intro */
+.part.out {
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 0.5s ease, transform 0.5s ease; /* faster exit */
 }
 
 /* SOLAR CONTAINER */
@@ -198,7 +205,7 @@ body.preload * {
     left:50%; 
     top:50%; 
     transform:translate(-50%,-50%); 
-    z-index:50; 
+    z-index: 500; /* above #intro-overlay (z-index:400) */
     filter: drop-shadow(0 12px 24px rgba(0,0,0,0.6)); 
 }
 
