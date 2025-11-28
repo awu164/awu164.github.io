@@ -169,7 +169,7 @@ body.preload * {
 .part.out {
     opacity: 0;
     transform: translateY(-6px);
-    transition: opacity 1s ease, transform 1s ease; /* faster exit */
+    transition: opacity 1.5s ease, transform 1.5s ease; /* faster exit */
 }
 
 /* SOLAR CONTAINER */
