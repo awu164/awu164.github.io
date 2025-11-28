@@ -268,7 +268,7 @@ body.preload * {
   width:auto; 
   height:auto; 
   margin:0; /* remove margin-left based positioning */
-  pointer-events: auto;
+  /*pointer-events: auto; */
 }
 
 /* planet images sized from variables */
