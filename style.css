@@ -11,12 +11,13 @@
 
   --bg: #000;
   --fg: #fff;
-  --muted: rgba(255, 255, 255, 0.4);
+  --muted: rgba(255, 255, 255, 0.259);
   --intro-offset-x: -60px; /* negative = shift left, positive = shift right */
 
-  --sun-glow-core: rgba(255,205,90,0.85);
-  --sun-glow-mid:  rgba(255,170,40,0.40);
-  --sun-glow-fade: rgba(255,130,0,0.10);
+  --sun-glow-core: rgba(255, 96, 60, 0.55);
+  --sun-glow-mid:  rgba(255, 101, 40, 0.259);
+  --sun-glow-fade: rgba(255, 55, 20, 0.2);
+  --sun-glow-extrafade: rgba(255, 47, 20, 0.055);
 }
 
 /* Reset & base */
@@ -229,17 +230,20 @@ body.preload * {
     pointer-events: none;
 }
 
+/* ::before - a decorative pseudo-element used to render a radial glow behind the sun
+   w/o extra HTML. It's absolutely positioned, blurred, and placed behind the sun via z-index:-1. */
 #sun-wrap::before {
   content:"";
   position:absolute;
-  inset:-50px; /* extend beyond sun */
+  inset:-70px; /* extend beyond sun */
   border-radius:50%;
   background:
     radial-gradient(circle,
       var(--sun-glow-core) 0%,
-      var(--sun-glow-mid) 38%,
-      var(--sun-glow-fade) 65%,
-      transparent 85%);
+      var(--sun-glow-mid) 25%,
+      var(--sun-glow-fade) 50%,
+      var(--sun-glow-extrafade) 75%,
+      transparent 85%); 
   filter: blur(22px);
   z-index:-1;
   pointer-events:none;
@@ -264,7 +268,7 @@ body.preload * {
 
 @keyframes sun-glow-pulse {
   0%   { transform: scale(1);   opacity:0.90; }
-  50%  { transform: scale(1.065); opacity:0.75; }
+  50%  { transform: scale(1.5); opacity:0.60; }
   100% { transform: scale(1);   opacity:0.90; }
 }
 
@@ -304,7 +308,7 @@ body.preload * {
   position:absolute; 
   inset:0; 
   border-radius:50%; 
-  border:2px solid var(--muted); 
+  border:1.5px solid var(--muted); 
 }
 
 /* planet anchor placed on orbit edge (to the right) */
