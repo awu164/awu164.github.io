@@ -35,9 +35,9 @@
     // When users click links to other pages from subpages, use fade-out navigation to match the dissolve pattern.
     (function(){
       const fadeOutThen = (href) => {
-        document.body.style.transition = 'opacity .6s ease';
+        document.body.style.transition = 'opacity 1s ease';
         document.body.style.opacity = '0';
-        setTimeout(()=> location.href = href, 620);
+        setTimeout(()=> location.href = href, 1000);
       };
       document.querySelectorAll('a').forEach(a => {
         a.addEventListener('click', (e) => {
