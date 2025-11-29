@@ -316,6 +316,15 @@ body.preload * {
   border: 1.25px solid var(--muted); 
 }
 
+/* show orbits after intro */
+.orbit.show { opacity:1; }
+
+.orbit.rotate { 
+    animation-name: orbit-rotate; 
+    animation-timing-function: linear; 
+    animation-iteration-count: infinite; 
+}
+
 /* planet anchor placed on orbit edge (to the right) */
 .planet { 
   position:absolute; 
@@ -348,19 +357,6 @@ body.preload * {
 .planet[data-planet="saturn"]  { --size: var(--size-saturn); }
 .planet[data-planet="uranus"]  { --size: var(--size-uranus); }
 
-/* show orbits after intro */
-.orbit.show { opacity:1; }
-
-/* rotation animation applied when .orbit.rotate added by JS; rotation is around the center */
-@keyframes orbit-rotate {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-.orbit.rotate { 
-    animation-name: orbit-rotate; 
-    animation-timing-function: linear; 
-    animation-iteration-count: infinite; 
-}
 
 /* fade out body while navigating */
 .fade-out-page { opacity:0 !important; transition:opacity .6s ease; }
