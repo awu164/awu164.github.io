@@ -8,15 +8,35 @@
   <link rel="stylesheet" href="../style.css" />
   <style>
     /* page-specific overrides for the content area */
-    body { background:#000; color:#fff; }
-    .page { min-height:100vh; padding:48px; display:flex; align-items:flex-start; gap:28px; }
-    .panel { max-width:860px; }
-    .planet-hero { width:140px; height:140px; border-radius:50%; overflow:hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.7); }
+    body {
+      background: #000;
+      color: #fff;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    body.visible {
+      opacity: 1;
+    }
 
-    /* fade-in for subpage body (so transition from homepage dissolves into this) */
-    body.fade-in { opacity:0; animation:pageFadeIn .6s forwards; }
-    .fade-out { opacity:0 !important; transition:opacity .6s ease; }
-    @keyframes pageFadeIn { to { opacity:1; } }
+    .page {
+      min-height: 100vh;
+      padding: 48px;
+      display: flex;
+      align-items: flex-start;
+      gap: 28px;
+    }
+
+    .panel {
+      max-width: 860px;
+    }
+
+    .planet-hero {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+    }
   </style>
 </head>
 
@@ -25,7 +45,6 @@
     <div class="panel">
       <h1>Earth</h1>
       <p>A short intro paragraph about Earth. Replace this with the content you'd like for this subpage.</p>
-
       <p><a href="../index.html" class="back-link">← Back to home</a></p>
     </div>
     <aside>
@@ -36,21 +55,26 @@
   </main>
 
   <script>
-    (function() {
-      document.body.classList.add("fade-in");
-      
+    (function () {
+      // fade in on page load
+      document.body.classList.add("visible");
+
       document.querySelectorAll('a').forEach(a => {
         a.addEventListener('click', (e) => {
-          // Open in new tab? Don't override.
+          // Open in new tab? Don't override
           if (e.metaKey || e.ctrlKey || a.target === "_blank") return;
 
           // Internal link = same origin
           if (a.origin === window.location.origin) {
             e.preventDefault();
-            document.body.classList.add('fade-out');
-            setTimeout(() => { window.location.href = a.href; }, 600);
+
+            // fade out
+            document.body.classList.remove("visible");
+
+            setTimeout(() => {
+              window.location.href = a.href;
+            }, 600); // matches transition duration
           }
-        
         });
       });
     })();
@@ -58,5 +82,4 @@
 </body>
 
 </html>
-
 
