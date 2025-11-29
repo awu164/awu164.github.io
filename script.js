@@ -23,6 +23,7 @@
         orbit.style.transform = `rotate(${saved}deg)`; // set exact angle
       }
     });
+    clearOrbitState();
   }
 
   // ---------------------------
@@ -46,6 +47,16 @@
 
       localStorage.setItem(`orbit-angle-${orbit.dataset.orbitId}`, angleDeg);
     });
+  }
+
+// ------------------------------------------------------------
+  // CLEAR localStorage after using the saved state (optional but cleaner)
+  // ------------------------------------------------------------
+  function clearOrbitState() {
+    orbits.forEach((_, i) => {
+      localStorage.removeItem(`orbit-${i}-transform`);
+    });
+    localStorage.removeItem("orbit-state-exists");
   }
 
   // ---------------------------
@@ -92,18 +103,23 @@
   // ---------------------------
   // Skip intro if returning
   // ---------------------------
-  function skipIntroImmediately() {
+    function skipIntroImmediately() {
     introOverlay.style.display = 'none';
     mainWrap.setAttribute('aria-hidden', 'false');
     mainWrap.classList.add('show');
 
     orbits.forEach(orbit => {
-      orbit.classList.add('show', 'rotate');
-      const dur = getComputedStyle(orbit).getPropertyValue('--duration').trim();
-      orbit.style.animationDuration = dur;
-      orbit.style.animationPlayState = animationsPaused ? 'paused' : 'running';
+        orbit.classList.add('show', 'rotate');
+        const dur = getComputedStyle(orbit).getPropertyValue('--duration').trim();
+        orbit.style.animationDuration = dur;
+
+        // restore saved angle
+        const saved = localStorage.getItem(`orbit-angle-${orbit.dataset.orbitId}`);
+        if (saved !== null) orbit.style.transform = `rotate(${saved}deg)`;
+
+        orbit.style.animationPlayState = animationsPaused ? 'paused' : 'running';
     });
-  }
+    }
 
   // ---------------------------
   // Animation toggle
