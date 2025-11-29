@@ -144,6 +144,7 @@
   // ---------------------------
   function fadeThenNavigate(url) {
     saveOrbitAngles();
+    localStorage.setItem('skip-intro', 'true');
     body.classList.add('fade-out-page');
     setTimeout(() => { window.location.href = url; }, 600);
   }
