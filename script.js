@@ -102,7 +102,7 @@
   // ---------------------------
   // Skip intro if returning
   // ---------------------------
-  function skipIntroImmediately() {
+  function skipIntro() {
     introOverlay.style.display = 'none';
     mainWrap.setAttribute('aria-hidden', 'false');
     mainWrap.classList.add('show');
@@ -199,7 +199,7 @@
 
     const returning = localStorage.getItem('skip-intro') === 'true';
     if (returning) {
-      skipIntroImmediately();
+      skipIntro();
       clearOrbitState();
     } else {
       runIntroSequence();

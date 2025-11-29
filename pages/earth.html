@@ -35,19 +35,20 @@
     // When users click links to other pages from subpages, use fade-out navigation to match the dissolve pattern.
     (function(){
       const fadeOutThen = (href) => {
+        document.body.style.animation = 'none';
         document.body.style.transition = 'opacity 1s ease';
-        document.body.style.opacity = '0';
+        requestAnimationFrame(() => {
+            document.body.style.opacity = '0';  // animates
+        });
         setTimeout(()=> location.href = href, 1000);
       };
       document.querySelectorAll('a').forEach(a => {
         a.addEventListener('click', (e) => {
-           e.preventDefault();
-           fadeOutThen(a.href);
           // allow external links and ctrl/cmd click behavior
-          /*if (a.href && !a.href.startsWith('http') || a.origin === location.origin) {
+          if (a.href && !a.href.startsWith('http') || a.origin === location.origin) {
             e.preventDefault();
             fadeOutThen(a.href);
-          } */
+          } 
         });
       });
     })();
