@@ -1,5 +1,6 @@
 // script.js
-// Responsible for: intro typing sequence, reveal sun + start orbits, side menu, and fade transitions to subpages.
+// Responsible for: intro typing sequence, reveal sun + start orbits, side menu, fade transitions,
+// and NOW saving + restoring orbit animation state so animation resumes when returning to main page.
 
 (() => {
   // Utility helpers
@@ -17,43 +18,96 @@
   const animBtn = document.getElementById('animation-button');
   let animationsPaused = false;
 
-  // After DOM loaded, remove preload so CSS animations run
+  // ------------------------------------------------------------
+  // Detect if we have saved orbit state (indicating a return)
+  // ------------------------------------------------------------
+  function hasSavedOrbitState() {
+    return localStorage.getItem("orbit-state-exists") === "true";
+  }
+
+  // ------------------------------------------------------------
+  // Save current CSS transforms for each orbit before navigation
+  // ------------------------------------------------------------
+  function saveOrbitPositions() {
+    orbits.forEach((orbit, i) => {
+      const computed = getComputedStyle(orbit);
+      const matrix = computed.transform;
+
+      localStorage.setItem(`orbit-${i}-transform`, matrix);
+    });
+
+    localStorage.setItem("orbit-state-exists", "true");
+  }
+
+  // ------------------------------------------------------------
+  // Restore CSS transforms for each orbit on page load
+  // ------------------------------------------------------------
+  function restoreOrbitPositions() {
+    orbits.forEach((orbit, i) => {
+      const saved = localStorage.getItem(`orbit-${i}-transform`);
+      if (!saved) return;
+
+      // Restore the transform
+      orbit.style.transform = saved;
+
+      // Ensure the CSS animation picks up from restored transform
+      orbit.classList.add("rotate");
+      orbit.style.animationPlayState = animationsPaused ? 'paused' : 'running';
+    });
+  }
+
+  // ------------------------------------------------------------
+  // Skip intro if returning from a subpage
+  // ------------------------------------------------------------
+  function skipIntroSequence() {
+    introOverlay.style.display = "none";
+  }
+
+  // ------------------------------------------------------------
+  // CLEAR localStorage after using the saved state (optional but cleaner)
+  // ------------------------------------------------------------
+  function clearOrbitState() {
+    orbits.forEach((_, i) => {
+      localStorage.removeItem(`orbit-${i}-transform`);
+    });
+    localStorage.removeItem("orbit-state-exists");
+  }
+
+  // ------------------------------------------------------------
+  // PAGE LOAD HANDLING
+  // ------------------------------------------------------------
   window.addEventListener('DOMContentLoaded', () => {
     body.classList.remove('preload');
 
-    // Start intro animation sequence
-    runIntroSequence();
     setupMenuToggle();
     setupPlanetNavigation();
     setupNavLinks();
-    setupAnimationToggle(); // enable pause/resume
-  });
-  // (Optional) keep 'load' in case you rely on it elsewhere; not needed for intro.
-  /*window.addEventListener('load', () => {
-    body.classList.remove('preload');
+    setupAnimationToggle();
 
-    // Start intro animation sequence
-    runIntroSequence();
-    setupMenuToggle();
-    setupPlanetNavigation();
-    setupNavLinks();
-  });*/
+    // If user is returning from a subpage, skip intro and restore animation
+    if (hasSavedOrbitState()) {
+      skipIntroSequence();
+      revealMain();
+      restoreOrbitPositions();
+      clearOrbitState(); // remove after restoring
+    } else {
+      runIntroSequence();
+    }
+  });
 
   // --- INTRO SEQUENCE ---
   function runIntroSequence(){
     // Step 1: show parts one by one (typing effect feel)
-    // Timing:
-    const delays = [600, 1400, 2200]; // ms for Alicia, Sun, Wu
+    const delays = [600, 1400, 2200];
     introParts.forEach((el, i) => {
       setTimeout(() => el.classList.add('visible'), delays[i]);
     });
 
-    // Step 2: keep visible, then fade parts out while keeping sun image behind
+    // Step 2: fade out
     const totalIntro = 3800;
     setTimeout(() => {
-      // fade letters out first
       introParts.forEach(el => el.classList.add('out'));
-      // small delay so letter fade starts, then fade the overlay
+
       setTimeout(() => {
         introOverlay.classList.add('fade-out');
         setTimeout(() => {
@@ -66,7 +120,6 @@
 
   // --- REVEAL MAIN CONTENT AND START ORBITS ---
   function revealMain(){
-    // allow interaction with main
     mainWrap.setAttribute('aria-hidden', 'false');
     mainWrap.classList.add('show');
 
@@ -75,10 +128,8 @@
       setTimeout(() => {
         orbit.classList.add('show');
         const dur = getComputedStyle(orbit).getPropertyValue('--duration') || '20s';
-        const numeric = ('' + dur).trim();
-        orbit.style.animationDuration = numeric;
+        orbit.style.animationDuration = dur.trim();
         orbit.classList.add('rotate');
-        // do not restart animation; just set play state
         orbit.style.animationPlayState = animationsPaused ? 'paused' : 'running';
       }, 350 * i + 250);
     });
@@ -87,7 +138,6 @@
   // --- ANIMATION TOGGLE BUTTON ---
   function setupAnimationToggle(){
     if (!animBtn) return;
-    // initialize label
     updateAnimBtnLabel();
     animBtn.addEventListener('click', () => {
       animationsPaused = !animationsPaused;
@@ -98,7 +148,6 @@
 
   function updateAnimationState(){
     orbits.forEach(orbit => {
-      // keep .rotate so progress is preserved; only change play state
       orbit.style.animationPlayState = animationsPaused ? 'paused' : 'running';
     });
   }
@@ -114,7 +163,6 @@
       const open = sideNav.classList.toggle('open');
       sideNav.setAttribute('aria-hidden', open ? 'false' : 'true');
     });
-    // close menu if click outside
     document.addEventListener('click', (e) => {
       if (!sideNav.contains(e.target) && e.target !== menuToggle && sideNav.classList.contains('open')) {
         sideNav.classList.remove('open');
@@ -123,11 +171,10 @@
     });
   }
 
-  // --- PLANET LINK NAVIGATION WITH DISSOLVE TRANSITION ---
+  // --- FADE + SAVE STATE + NAVIGATE ---
   function fadeThenNavigate(url){
-    // Apply fade class to body (fade out)
+    saveOrbitPositions(); // <-- NEW: save animation before page leaves
     body.classList.add('fade-out-page');
-    // small delay to let CSS animate, then navigate
     setTimeout(() => { window.location.href = url; }, 600);
   }
 
@@ -136,21 +183,18 @@
     planetAnchors.forEach(a => {
       a.addEventListener('click', (ev) => {
         ev.preventDefault();
-        const href = a.getAttribute('href');
-        fadeThenNavigate(href);
+        fadeThenNavigate(a.getAttribute('href'));
       });
-      // keyboard accessibility: Enter triggers navigation
       a.addEventListener('keydown', (ev) => {
         if (ev.key === 'Enter' || ev.key === ' ') {
           ev.preventDefault();
-          const href = a.getAttribute('href');
-          fadeThenNavigate(href);
+          fadeThenNavigate(a.getAttribute('href'));
         }
       });
     });
   }
 
-  // Side nav links should behave same as planet links (dissolve)
+  // Side nav links behave same as planets
   function setupNavLinks(){
     const navLinks = $$('.nav-link');
     navLinks.forEach(a => {
@@ -162,13 +206,10 @@
     });
   }
 
-  // Prevent accidental middle-click open in new tab: still allow default for ctrl/cmd clicks
+  // Allow ctrl/cmd new-tab but block middle click resets
   document.addEventListener('click', (e) => {
     if (e.target.closest('.planet')) {
-      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) {
-        // default — allow new tab
-        return;
-      }
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
     }
   });
 
