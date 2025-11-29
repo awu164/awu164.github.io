@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -19,6 +20,7 @@
     .fade-out-page { opacity:0 !important; transition:opacity .6s ease; }
   </style>
 </head>
+
 <body>
   <main class="page">
     <div class="panel">
@@ -35,25 +37,29 @@
   </main>
 
   <script>
-    // When users click links to other pages from subpages, use fade-out navigation to match the dissolve pattern.
-    (function(){
+    (function() {
       const fadeOutThen = (href) => {
-        body.classList.add('fade-out-page');
-        setTimeout(()=> { window.location.href = href; }, 600);
+        document.body.classList.add('fade-out-page');
+        setTimeout(() => { window.location.href = href; }, 600);
       };
 
       document.querySelectorAll('a').forEach(a => {
         a.addEventListener('click', (e) => {
-          // allow external links and ctrl/cmd click behavior
-          if (a.href && !a.href.startsWith('http') || a.origin === location.origin) {
+        // Open in new tab? Don't override.
+        if (e.metaKey || e.ctrlKey || a.target === "_blank") return;
+
+        // Internal link = same origin
+        if (a.origin === window.location.origin) {
             e.preventDefault();
             fadeOutThen(a.href);
-          } 
+        }
         });
       });
+
     })();
   </script>
 </body>
+
 </html>
 
 
