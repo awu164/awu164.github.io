@@ -14,10 +14,9 @@
     .planet-hero { width:140px; height:140px; border-radius:50%; overflow:hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.7); }
 
     /* fade-in for subpage body (so transition from homepage dissolves into this) */
-    body { opacity:0; animation:pageFadeIn .6s forwards; }
+    body.fade-in { opacity:0; animation:pageFadeIn .6s forwards; }
+    .fade-out { opacity:0 !important; transition:opacity .6s ease; }
     @keyframes pageFadeIn { to { opacity:1; } }
-
-    .fade-out-page { opacity:0 !important; transition:opacity .6s ease; }
   </style>
 </head>
 
@@ -38,24 +37,22 @@
 
   <script>
     (function() {
-      const fadeOutThen = (href) => {
-        document.body.classList.add('fade-out-page');
-        setTimeout(() => { window.location.href = href; }, 600);
-      };
-
+      document.body.classList.add("fade-in");
+      
       document.querySelectorAll('a').forEach(a => {
         a.addEventListener('click', (e) => {
-        // Open in new tab? Don't override.
-        if (e.metaKey || e.ctrlKey || a.target === "_blank") return;
+          // Open in new tab? Don't override.
+          if (e.metaKey || e.ctrlKey || a.target === "_blank") return;
 
-        // Internal link = same origin
-        if (a.origin === window.location.origin) {
+          // Internal link = same origin
+          if (a.origin === window.location.origin) {
             e.preventDefault();
-            fadeOutThen(a.href);
-        }
+            document.body.classList.add('fade-out');
+            setTimeout(() => { window.location.href = href; }, 600);
+          }
+        
         });
       });
-
     })();
   </script>
 </body>
