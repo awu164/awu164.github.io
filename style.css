@@ -287,22 +287,26 @@ body.preload * {
 
 /* Generic orbit container centers on sun and rotates */
 .orbit {
+  --start-rotation: 0deg;
   position:absolute; 
   left:50%; 
   top:50%;
-  /* pivot must be at the orbit center */
   transform-origin: center center;
   width: calc(var(--radius) * 2); 
   height: calc(var(--radius) * 2);
   margin-left: calc(-1 * var(--radius)); 
   margin-top: calc(-1 * var(--radius));
   border-radius:50%; 
-  display:block; /* no need for flex for positioning the planet */
+  display:block; 
   opacity:0; 
   transition:opacity .9s ease;
   pointer-events: none;
 }
 
+@keyframes orbit-rotate {
+  from { transform: rotate(var(--start-rotation)); }
+  to   { transform: rotate(calc(var(--start-rotation) + 360deg)); }
+}
 /* subtle visual orbit lines (muted) */
 .orbit::before {
   content:""; 

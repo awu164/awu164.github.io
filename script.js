@@ -20,7 +20,7 @@
     orbits.forEach(orbit => {
       const saved = localStorage.getItem(`orbit-angle-${orbit.dataset.orbitId}`);
       if (saved !== null) {
-        orbit.style.transform = `rotate(${saved}deg)`; // set exact angle
+        orbit.style.setProperty('--start-rotation', `${saved}deg`);
       }
     });
     clearOrbitState();
@@ -54,9 +54,9 @@
   // ------------------------------------------------------------
   function clearOrbitState() {
     orbits.forEach((_, i) => {
-      localStorage.removeItem(`orbit-${i}-transform`);
+      localStorage.removeItem(`orbit-angle-${i}`);
     });
-    localStorage.removeItem("orbit-state-exists");
+    localStorage.removeItem("skip-intro");
   }
 
   // ---------------------------
