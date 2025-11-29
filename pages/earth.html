@@ -41,11 +41,13 @@
       };
       document.querySelectorAll('a').forEach(a => {
         a.addEventListener('click', (e) => {
+           e.preventDefault();
+           fadeOutThen(a.href);
           // allow external links and ctrl/cmd click behavior
-          if (a.href && !a.href.startsWith('http') || a.origin === location.origin) {
+          /*if (a.href && !a.href.startsWith('http') || a.origin === location.origin) {
             e.preventDefault();
             fadeOutThen(a.href);
-          }
+          } */
         });
       });
     })();
