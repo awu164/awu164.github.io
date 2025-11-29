@@ -23,7 +23,6 @@
         orbit.style.setProperty('--start-rotation', `${saved}deg`);
       }
     });
-    clearOrbitState();
   }
 
   // ---------------------------
@@ -103,7 +102,7 @@
   // ---------------------------
   // Skip intro if returning
   // ---------------------------
-    function skipIntroImmediately() {
+  function skipIntroImmediately() {
     introOverlay.style.display = 'none';
     mainWrap.setAttribute('aria-hidden', 'false');
     mainWrap.classList.add('show');
@@ -119,7 +118,7 @@
 
         orbit.style.animationPlayState = animationsPaused ? 'paused' : 'running';
     });
-    }
+  }
 
   // ---------------------------
   // Animation toggle
@@ -200,6 +199,7 @@
     const returning = localStorage.getItem('skip-intro') === 'true';
     if (returning) {
       skipIntroImmediately();
+      clearOrbitState();
     } else {
       runIntroSequence();
     }
@@ -208,8 +208,5 @@
     setupPlanetNavigation();
     setupNavLinks();
     setupAnimationToggle();
-
-    // Mark intro as seen
-    localStorage.setItem('skip-intro', 'true');
   });
 })();
