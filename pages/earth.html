@@ -48,7 +48,7 @@
           if (a.origin === window.location.origin) {
             e.preventDefault();
             document.body.classList.add('fade-out');
-            setTimeout(() => { window.location.href = href; }, 600);
+            setTimeout(() => { window.location.href = a.href; }, 600);
           }
         
         });
