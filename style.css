@@ -222,7 +222,6 @@ body.preload * {
   background: transparent; 
   color:#fff; 
   pointer-events:none;
-  transition:opacity .8s ease, transform .6s ease;
 }
 
 .solar-name-block { 
@@ -233,6 +232,7 @@ body.preload * {
     align-items:right; 
     margin:0; 
     padding:0;
+    transition: opacity .8s ease, transform .6s ease, letter-spacing .4s ease;
 }
 
 
