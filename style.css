@@ -57,6 +57,10 @@ body.preload * {
   border-radius:8px; 
   cursor:pointer;
   backdrop-filter: blur(6px);
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease;
 }
 #side-nav {
   position:fixed; 
@@ -205,6 +209,10 @@ body.preload * {
     border-radius:8px; 
     cursor:pointer;
     backdrop-filter: blur(6px);
+
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1s ease;
 }
 
 /* SOLAR SYSTEM NAME */
@@ -222,17 +230,18 @@ body.preload * {
   background: transparent; 
   color:#fff; 
   pointer-events:none;
+  opacity: 0;
+  transition: opacity 1s ease;
 }
 
 .solar-name-block { 
-    font-size: clamp(50x, 7vw, 100px);
+    font-size: 80px;
     letter-spacing: -0.02em; 
     display:flex; 
     gap:0.4rem; 
-    align-items:right; 
     margin:0; 
     padding:0;
-    transition: opacity .8s ease, transform .6s ease, letter-spacing .4s ease;
+    transition: opacity 1s ease;
 }
 
 
@@ -300,10 +309,6 @@ body.preload * {
     0 0 110px 42px var(--sun-glow-fade),
     0 0 160px 90px var(--sun-glow-extrafade); 
 }
-
-
-
-
 
 
 /* ORBITS */

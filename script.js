@@ -89,6 +89,14 @@
   function revealMain() {
     mainWrap.setAttribute('aria-hidden', 'false');
     mainWrap.classList.add('show');
+      
+    menuToggle.style.opacity = '1';
+    menuToggle.style.pointerEvents = 'auto';
+
+    animBtn.style.opacity = '1';
+    animBtn.style.pointerEvents = 'auto';
+
+    solarName.style.opacity = '1';
 
     orbits.forEach((orbit, i) => {
       setTimeout(() => {
@@ -107,6 +115,15 @@
     introOverlay.style.display = 'none';
     mainWrap.setAttribute('aria-hidden', 'false');
     mainWrap.classList.add('show');
+
+    menuToggle.style.opacity = '1';
+    menuToggle.style.pointerEvents = 'auto';
+
+    animBtn.style.opacity = '1';
+    animBtn.style.pointerEvents = 'auto';
+
+    solarName.style.opacity = '1';
+
 
     orbits.forEach(orbit => {
         orbit.classList.add('show', 'rotate');
@@ -205,7 +222,6 @@
     } else {
       runIntroSequence();
     }
-    solarName.setAttribute('aria-hidden', 'false');
     setupMenuToggle();
     setupPlanetNavigation();
     setupNavLinks();
