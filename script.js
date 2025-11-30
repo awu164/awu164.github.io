@@ -10,6 +10,7 @@
   const menuToggle   = $('#menu-toggle');
   const sideNav      = $('#side-nav');
   const animBtn      = $('#animation-button');
+  const solarName    = $('#solar-name')
 
   let animationsPaused = false;
 
@@ -204,7 +205,7 @@
     } else {
       runIntroSequence();
     }
-
+    solarName.setAttribute('aria-hidden', 'false');
     setupMenuToggle();
     setupPlanetNavigation();
     setupNavLinks();

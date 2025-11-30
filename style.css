@@ -216,19 +216,23 @@ body.preload * {
   align-items:flex-end; 
   text-align: right;
   flex-direction: column;
+  line-height: 1.05; 
+  right: 18px;
 
   background: transparent; 
   color:#fff; 
-  pointer-events:auto; /* was none; needed for stop button */
+  pointer-events:none;
   transition:opacity .8s ease, transform .6s ease;
 }
 
 .solar-name-block h1 { 
-    font-size: clamp(53x, 5vw, 70px); /* increased min, vw scaling, and max */
+    font-size: clamp(50x, 7vw, 100px);
     letter-spacing: -0.02em; 
-    display:flex; gap:0.4rem; 
+    display:flex; 
+    gap:0.4rem; 
     align-items:right; 
     margin:0; 
+    padding:0;
 }
 
 
