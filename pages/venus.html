@@ -25,8 +25,14 @@
       align-items: flex-start;
       gap: 48px;
       justify-content: center; /* center children horizontally */
-      max-width: 1200px; /* optional: constrain width */
+      max-width: 1400px; /* was 1200px: give room for 3 cols + aside */
       margin: 0 auto; /* center the main container itself */
+    }
+
+    /* Make the content panel consume available space next to the aside */
+    .panel {
+      flex: 1 1 auto;
+      min-width: 0;
     }
 
     /* Solar system themed hero */
@@ -51,9 +57,17 @@
     /* ---------- PROJECT GRID ---------- */
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      grid-template-columns: repeat(3, 1fr); /* fixed 3 cols */
       gap: 32px;
       margin-top: 20px;
+    }
+
+    /* Responsive fallbacks so cards don’t get too narrow */
+    @media (max-width: 1100px) {
+      .projects-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 700px) {
+      .projects-grid { grid-template-columns: 1fr; }
     }
 
     /* ---------- PROJECT CARD ---------- */
