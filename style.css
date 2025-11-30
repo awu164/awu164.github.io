@@ -209,8 +209,7 @@ body.preload * {
 
 /* SOLAR SYSTEM NAME */
 #solar-name {
-  position:fixed; 
-  inset:0; 
+  position:fixed;  
   z-index:400; 
   display:flex; 
   align-items:flex-end; 
@@ -218,6 +217,7 @@ body.preload * {
   flex-direction: column;
   line-height: 1.05; 
   right: 18px;
+  top: 18px;
 
   background: transparent; 
   color:#fff; 
@@ -225,7 +225,7 @@ body.preload * {
   transition:opacity .8s ease, transform .6s ease;
 }
 
-.solar-name-block h1 { 
+.solar-name-block { 
     font-size: clamp(50x, 7vw, 100px);
     letter-spacing: -0.02em; 
     display:flex; 
