@@ -196,8 +196,8 @@ body.preload * {
 #animation-button {
     position:fixed; 
     z-index:200; 
-    right:18px; 
-    top:18px;
+    left:18px; 
+    bottom:18px;
     background:transparent; 
     border:2px solid rgba(255,255,255,0.1); 
     color:var(--fg);
@@ -206,6 +206,31 @@ body.preload * {
     cursor:pointer;
     backdrop-filter: blur(6px);
 }
+
+/* SOLAR SYSTEM NAME */
+#solar-name {
+  position:fixed; 
+  inset:0; 
+  z-index:400; 
+  display:flex; 
+  align-items:flex-end; 
+  text-align: right;
+  flex-direction: column;
+
+  background: transparent; 
+  color:#fff; 
+  pointer-events:auto; /* was none; needed for stop button */
+  transition:opacity .8s ease, transform .6s ease;
+}
+
+.solar-name-block h1 { 
+    font-size: clamp(53x, 5vw, 70px); /* increased min, vw scaling, and max */
+    letter-spacing: -0.02em; 
+    display:flex; gap:0.4rem; 
+    align-items:right; 
+    margin:0; 
+}
+
 
 /* center area */
 #solar-container { 
