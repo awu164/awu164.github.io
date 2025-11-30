@@ -61,13 +61,13 @@
     document.body.classList.add("visible");
 
     const backLink = document.querySelector('.back-link'); 
-    if (!backLink) return;
-
-    backLink.addEventListener('click', (e) => {
-      e.preventDefault();              
-      document.body.classList.remove("visible"); 
-      setTimeout(() => { window.location.href = backLink.href; }, 600); 
-    });
+    if (backLink) {
+      backLink.addEventListener('click', (e) => {
+        e.preventDefault();              
+        document.body.classList.remove("visible"); 
+        setTimeout(() => { window.location.href = backLink.href; }, 600); 
+      });
+    }
 
   </script>
 </body>
