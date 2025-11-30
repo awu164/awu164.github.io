@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Earth — Alicia Sun Wu</title>
   <link rel="stylesheet" href="../style.css" />
+
   <style>
     /* page-specific overrides for the content area */
     body {
@@ -38,6 +39,7 @@
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
     }
   </style>
+
 </head>
 
 <body>
@@ -55,29 +57,18 @@
   </main>
 
   <script>
-    (function () {
-      // fade in on page load
-      document.body.classList.add("visible");
+    // fade in on page load
+    document.body.classList.add("visible");
 
-      document.querySelectorAll('a').forEach(a => {
-        a.addEventListener('click', (e) => {
-          // Open in new tab? Don't override
-          if (e.metaKey || e.ctrlKey || a.target === "_blank") return;
+    const backLink = document.querySelector('.back-link'); 
+    if (!backLink) return;
 
-          // Internal link = same origin
-          if (a.origin === window.location.origin) {
-            e.preventDefault();
+    backLink.addEventListener('click', (e) => {
+      e.preventDefault();              
+      document.body.classList.remove("visible"); 
+      setTimeout(() => { window.location.href = backLink.href; }, 600); 
+    });
 
-            // fade out
-            document.body.classList.remove("visible");
-
-            setTimeout(() => {
-              window.location.href = a.href;
-            }, 600); // matches transition duration
-          }
-        });
-      });
-    })();
   </script>
 </body>
 

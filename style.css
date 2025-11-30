@@ -12,7 +12,7 @@
   --bg: #000;
   --fg: #fff;
   --muted: rgba(255, 255, 255, 0.165);
-  --intro-offset-x: -75px; /* negative = shift left, positive = shift right */
+  --intro-offset-x: -80px; /* negative = shift left, positive = shift right */
 
   --sun-glow-core: rgba(255, 122, 60, 0.55);
   --sun-glow-mid:  rgba(255, 112, 40, 0.259);
