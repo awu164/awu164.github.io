@@ -12,7 +12,7 @@
   --bg: #000;
   --fg: #fff;
   --muted: rgba(255, 255, 255, 0.165);
-  --intro-offset-x: -80px; /* negative = shift left, positive = shift right */
+  --intro-offset-x: -90px; /* negative = shift left, positive = shift right */
 
   --sun-glow-core: rgba(255, 122, 60, 0.55);
   --sun-glow-mid:  rgba(255, 112, 40, 0.259);
@@ -135,7 +135,7 @@ body.preload * {
 }
 
 .intro-center h1 { 
-    font-size: clamp(56px, 8vw, 120px); /* increased min, vw scaling, and max */
+    font-size: clamp(56px, 9vw, 120px); /* increased min, vw scaling, and max */
     letter-spacing: -0.02em; 
     display:flex; gap:0.4rem; 
     align-items:center; 
