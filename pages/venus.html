@@ -34,7 +34,7 @@
       flex: 1 1 auto;
       min-width: 0;
     }
-    
+
     /* ---------- SECTION HEADINGS ---------- */
     .section-heading {
       font-size: 1.8rem;
@@ -104,9 +104,9 @@
     .tech-js { background:#ffd66d; }
     .tech-react { background:#61dbfb; }
     .tech-ts { background:#4c8dff; }
-    .tech-php { background:#a991ff; }
+    .tech-java { background:#a991ff; }
     .tech-wp { background:#0098d4; }
-    .tech-native { background:#8ae3ff; }
+    .tech-c { background:#8ae3ff; }
 
     /* ---------- ICON ROW ---------- */
     .card-links {
@@ -116,14 +116,13 @@
       align-items: center;
     }
 
-    .icon-link {
-      font-size: 1.3rem;
+    .github-logo {
+      width: 1.4em;
+      height: 1.4em;
       opacity: 0.8;
       transition: opacity 0.2s ease;
-      text-decoration: none;
-      color: #fff;
     }
-    .icon-link:hover {
+    .github-logo:hover {
       opacity: 1;
     }
 
@@ -146,67 +145,89 @@
       <div class="section-heading">Completed Projects</div>
 
       <div class="projects-grid">
-
-        <!-- Example Card 1 -->
+        <!-- personal website-->
         <div class="project-card">
-          <h3>Example 1</h3>
-          <p>Blah blah blah example example example.</p>
+          <h3>awu164.github.io</h3>
+          <p>This website!</p>
 
           <div class="tech-list">
-            <span class="tech-tag tech-js">JavaScript</span>
-            <span class="tech-tag tech-html">HTML</span>
-            <span class="tech-tag tech-css">CSS</span>
+            <span class="tech-tag tech-html">C/C++</span>
+            <span class="tech-tag tech-css">C/C++</span>
+            <span class="tech-tag tech-js">C/C++</span>
           </div>
 
           <div class="card-links">
-            <a class="icon-link" href="#" title="Visit Project">🔗</a>
-            <a class="icon-link" href="#" title="GitHub Repo">🐙</a>
+            <img class = "github-logo" src="../assets/github_logo.png" href = "https://github.com/csci0300/cs300-f25-projects-awu164/tree/main/weensyos">
           </div>
         </div>
 
-        <!-- Example Card 2 -->
+        <!-- Weensy-->
         <div class="project-card">
-          <h3>Example 2</h3>
-          <p>Blah blah blah example example example</p>
+          <h3>WeensyOS</h3>
+          <p>A lightweight operating system in C, including core kernel functionaltiy, virtual memory management, per-process memory isolation, and page-table management, and process-creation and teardown functions (fork, exit).</p>
 
           <div class="tech-list">
-            <span class="tech-tag tech-ts">TypeScript</span>
-            <span class="tech-tag tech-native">React Native</span>
+            <span class="tech-tag tech-c">C/C++</span>
           </div>
 
           <div class="card-links">
-            <a class="icon-link" href="#" title="Visit Project">🔗</a>
-            <a class="icon-link" href="#" title="GitHub Repo">🐙</a>
+            <img class = "github-logo" src="../assets/github_logo.png" href = "https://github.com/csci0300/cs300-f25-projects-awu164/tree/main/weensyos">
           </div>
         </div>
 
+        <!-- Caching -->
         <div class="project-card">
-          <h3>example 3</h3>
-          <p>Blah blah blah example example example</p>
+          <h3>Caching I/O</h3>
+          <p>A high-performance file I/O caching system in C containing a variable-size software cache with cache-hit logic, flush policies, and metadata tracking modeled after CPU cache.</p>
 
           <div class="tech-list">
-            <span class="tech-tag tech-ts">TypeScript</span>
-            <span class="tech-tag tech-native">React Native</span>
+            <span class="tech-tag tech-c">C/C++</span>
           </div>
 
           <div class="card-links">
-            <a class="icon-link" href="#" title="Visit Project">🔗</a>
-            <a class="icon-link" href="#" title="GitHub Repo">🐙</a>
+            <img class = "github-logo" src="../assets/github_logo.png" href = "https://github.com/csci0300/cs300-f25-projects-awu164/tree/main/fileio">
           </div>
         </div>
 
+        <!-- Chess -->
         <div class="project-card">
-          <h3>example 4</h3>
-          <p>Blah blah blah example example example</p>
+          <h3>Chess Bot</h3>
+          <p>Interactive Java-based chess bot vs. human game. </p>
 
           <div class="tech-list">
-            <span class="tech-tag tech-ts">TypeScript</span>
-            <span class="tech-tag tech-native">React Native</span>
+            <span class="tech-tag tech-java">Java</span>
           </div>
 
           <div class="card-links">
-            <a class="icon-link" href="#" title="Visit Project">🔗</a>
-            <a class="icon-link" href="#" title="GitHub Repo">🐙</a>
+            <img class = "github-logo" src="../assets/github_logo.png" href = "https://github.com/brown-cs15-2024/indy-awu164">
+          </div>
+        </div>
+
+        <!-- Tetris -->
+        <div class="project-card">
+          <h3>Tetris</h3>
+          <p>A classic puzzle video game where players manipulate falling geometric shapes to form complete horizontal lines in a playing field (Matrix), which then clear for points, with the goal of preventing the stack from reaching the top</p>
+
+          <div class="tech-list">
+            <span class="tech-tag tech-java">Java</span>
+          </div>
+
+          <div class="card-links">
+            <img class = "github-logo" src="../assets/github_logo.png" href = "https://github.com/brown-cs15-2024/tetris-awu164">
+          </div>
+        </div>
+
+        <!-- Doodlejump -->
+        <div class="project-card">
+          <h3>Doodlejump</h3>
+          <p>My take on a classic mobile game for enjoyment on the computer!</p>
+
+          <div class="tech-list">
+            <span class="tech-tag tech-java">Java</span>
+          </div>
+
+          <div class="card-links">
+            <img class = "github-logo" src="../assets/github_logo.png" href = "https://github.com/brown-cs15-2024/doodlejump-awu164">
           </div>
         </div>
 
@@ -217,35 +238,23 @@
 
       <div class="projects-grid">
 
+        <!-- Brown Crisis Student-Reporting Tool-->
         <div class="project-card">
-          <h3>Example 5</h3>
-          <p>Blah blah blah example example example</p>
+          <h3>UReport</h3>
+          <p>In light of the 2025 Brown shooting, designing a student report feature in the BrownU App to facilitate quicker campus-wide alerts for potential crisis situations.</p>
 
           <div class="tech-list">
-            <span class="tech-tag tech-js">JavaScript</span>
-          </div>
-
-          <div class="card-links">
-            <a class="icon-link" href="#" title="GitHub Repo">🐙</a>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <h3>Example 6</h3>
-          <p>Blah blah blah example example example.</p>
-
-          <div class="tech-list">
+            <span class="tech-tag tech-react">React</span>
+            <span class="tech-tag tech-ts">TypeScript</span>
             <span class="tech-tag tech-html">HTML</span>
-            <span class="tech-tag tech-css">CSS</span>
-            <span class="tech-tag tech-js">JavaScript</span>
           </div>
 
           <div class="card-links">
-            <a class="icon-link" href="#">🔗</a>
-            <a class="icon-link" href="#">🐙</a>
+            <img class = "github-logo" src="../assets/github_logo.png" href = "https://github.com/brown-cs15-2024/doodlejump-awu164">
           </div>
         </div>
 
+      </div>
       </div>
     </div>
   </main>
