@@ -3,52 +3,189 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>About Me (Mercury)</title>
+  <title>About Me</title>
+
+  <!-- Font Awesome for icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4wz9Z+6a3H2xkLZ7G6x2h0Ug=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
   <link rel="stylesheet" href="../style.css" />
+
   <style>
-    /* page-specific overrides for the content area */
-    body { background:#000; color:#fff; }
-    .page { min-height:100vh; padding:48px; display:flex; align-items:flex-start; gap:28px; }
-    .panel { max-width:860px; }
-    .planet-hero { width:140px; height:140px; border-radius:50%; overflow:hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.7); }
-    /* fade-in for subpage body (so transition from homepage dissolves into this) */
-    body { opacity:0; animation:pageFadeIn .6s forwards; }
-    @keyframes pageFadeIn { to { opacity:1; } }
+    /* ----- Page-wide overrides ----- */
+    body {
+      background: #000;
+      color: #fff;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+      font-family: system-ui, sans-serif;
+    }
+    body.visible { opacity: 1; }
+
+    main.page {
+      min-height: 100vh;
+      padding: 48px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    /* ----- Main panel ----- */
+    .panel {
+      width: 100%;
+      max-width: 900px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      padding: 48px;
+      box-sizing: border-box;
+    }
+
+    /* ----- Header area ----- */
+    .about-header {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+
+    .profile-pic {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+
+    .profile-pic img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .about-title h1 {
+      margin: 0;
+      font-size: 2.4rem;
+      font-weight: 600;
+    }
+
+    .about-title p {
+      margin-top: 8px;
+      color: rgba(255,255,255,0.7);
+      font-size: 1.1rem;
+    }
+
+    /* ----- Bio ----- */
+    .bio {
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 36px;
+    }
+
+    /* ----- Social links ----- */
+    .social-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .social-links a {
+      color: rgba(255,255,255,0.8);
+      font-size: 1.6rem;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .social-links a:hover {
+      color: #7abfff;
+      transform: translateY(-2px);
+    }
+
+    /* ----- Back link ----- */
+    .back-link {
+      display: inline-block;
+      margin-top: 40px;
+      color: #7abfff;
+      text-decoration: none;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
+
 <body>
   <main class="page">
     <div class="panel">
-      <h1>I'm Alicia!</h1>
-      <p>Here's a little bit about me...</p>
 
-      <p><a href="../index.html" class="back-link">← Back to home</a></p>
-    </div>
-    <aside>
-      <div class="planet-hero">
-        <img src="../assets/mercury.png" alt="Mercury" style="width:100%;height:100%;object-fit:cover;">
+      <div class="about-header">
+        <div class="profile-pic">
+          <!-- Replace with your image -->
+          <img src="../assets/me.jpg" alt="Photo of Alicia">
+        </div>
+
+        <div class="about-title">
+          <h1>I'm Alicia 👋</h1>
+          <p>Computer science student interested in AI, systems, and impact-driven tech.</p>
+        </div>
       </div>
-    </aside>
+
+      <div class="bio">
+        <p>
+          I'm a student at Brown University studying computer science, with interests spanning
+          software engineering, machine learning, and responsible technology.
+          I enjoy working at the intersection of technical depth and real-world impact —
+          whether that's through building products, research, or thoughtful design.
+        </p>
+        <p>
+          Outside of class, I’m involved in investment and tech-focused student groups,
+          and I love learning new tools, experimenting with side projects, and thinking
+          critically about how technology shapes society.
+        </p>
+      </div>
+
+      <div class="social-links">
+        <a href="mailto:alicia_s_wu@brown.edu" aria-label="Email">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
+        <a href="https://github.com/awu164" target="_blank" aria-label="GitHub">
+          <i class="fa-brands fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/alicia-wu-a94245245/" target="_blank" aria-label="LinkedIn">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </div>
+
+      <p>
+        <a href="../index.html" class="back-link">← Back to home</a>
+      </p>
+
+    </div>
   </main>
 
   <script>
-    // When users click links to other pages from subpages, use fade-out navigation to match the dissolve pattern.
-    (function(){
-      const fadeOutThen = (href) => {
-        document.body.style.transition = 'opacity .6s ease';
-        document.body.style.opacity = '0';
-        setTimeout(()=> location.href = href, 620);
-      };
-      document.querySelectorAll('a').forEach(a => {
-        a.addEventListener('click', (e) => {
-          // allow external links and ctrl/cmd click behavior
-          if (a.href && !a.href.startsWith('http') || a.origin === location.origin) {
-            e.preventDefault();
-            fadeOutThen(a.href);
-          }
-        });
+    // Fade-in
+    document.body.classList.add("visible");
+
+    // Fade-out on back
+    const backLink = document.querySelector('.back-link');
+    if (backLink) {
+      backLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.body.classList.remove("visible");
+        setTimeout(() => {
+          window.location.href = backLink.href;
+        }, 600);
       });
-    })();
+    }
   </script>
 </body>
 </html>
