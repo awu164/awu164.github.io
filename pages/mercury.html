@@ -4,16 +4,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>About Me</title>
-
-  <!-- Font Awesome for icons -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4wz9Z+6a3H2xkLZ7G6x2h0Ug=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
-
   <link rel="stylesheet" href="../style.css" />
 
   <style>
@@ -95,6 +85,17 @@
       display: flex;
       gap: 24px;
       align-items: center;
+      pointer-events: auto;
+    }
+
+    .icon-logo {
+      width: 1.4em;
+      height: 1.4em;
+      opacity: 0.8;
+      transition: opacity 0.2s ease;
+    }
+    .icon-logo:hover {
+      opacity: 1;
     }
 
     .social-links a {
@@ -129,11 +130,11 @@
       <div class="about-header">
         <div class="profile-pic">
           <!-- Replace with your image -->
-          <img src="../assets/me.jpg" alt="Photo of Alicia">
+          <img src="../assets/alicia_github.png" alt="Photo of Alicia">
         </div>
 
         <div class="about-title">
-          <h1>I'm Alicia 👋</h1>
+          <h1>Hi! I'm Alicia</h1>
           <p>Computer science student interested in AI, systems, and impact-driven tech.</p>
         </div>
       </div>
@@ -153,15 +154,9 @@
       </div>
 
       <div class="social-links">
-        <a href="mailto:alicia_s_wu@brown.edu" aria-label="Email">
-          <i class="fa-solid fa-envelope"></i>
-        </a>
-        <a href="https://github.com/awu164" target="_blank" aria-label="GitHub">
-          <i class="fa-brands fa-github"></i>
-        </a>
-        <a href="https://www.linkedin.com/in/alicia-wu-a94245245/" target="_blank" aria-label="LinkedIn">
-          <i class="fa-brands fa-linkedin"></i>
-        </a>
+        <img class = "icon-logo" src="../assets/email.webp" href = "mailto:alicia_s_wu@brown.edu">
+        <img class = "icon-logo" src="../assets/github_logo.png" href = "https://github.com/awu164">
+        <img class = "icon-logo" src="../assets/linkedin_logo.png" href = "https://www.linkedin.com/in/alicia-wu-a94245245/">
       </div>
 
       <p>
