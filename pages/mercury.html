@@ -13,8 +13,7 @@
       color: #fff;
       opacity: 0;
       transition: opacity 0.6s ease;
-      font-family: "font-serif";
-      pointer-events:auto;
+      pointer-events:none;
     }
     body.visible { opacity: 1; }
 
@@ -35,6 +34,7 @@
       border-radius: 16px;
       padding: 48px;
       box-sizing: border-box;
+      font-family: "font-serif";
     }
 
     /* ----- Header area ----- */
@@ -93,6 +93,7 @@
       height: 1.4em;
       opacity: 0.8;
       transition: opacity 0.2s ease;
+      pointer-events: auto;
     }
     .icon-logo:hover {
       opacity: 1;
@@ -115,11 +116,68 @@
       margin-top: 40px;
       color: #7abfff;
       text-decoration: none;
+      pointer-events: auto;
     }
 
     .back-link:hover {
       text-decoration: underline;
     }
+
+    /* ---- slideshow --*/
+    .slideshow {
+      position: relative;
+      max-width: 640px;
+      margin: 48px auto;
+      text-align: center;
+    }
+
+    .slide-frame {
+      overflow: hidden;
+      border-radius: 14px;
+    }
+
+    .slide-frame img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      border: 1px solid rgba(255,255,255,0.15);
+      opacity: 1;
+      transition: opacity 0.35s ease;
+    }
+
+    /* Navigation arrows */
+    .nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.55);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: #fff;
+      font-size: 2rem;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .nav:hover {
+      background: rgba(0,0,0,0.75);
+    }
+
+    .nav.left { left: -22px; }
+    .nav.right { right: -22px; }
+
+    .caption {
+      margin-top: 14px;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.75);
+      min-height: 1.5em;
+    }
+
   </style>
 </head>
 
@@ -136,6 +194,11 @@
         <div class="about-title">
           <h1>Hi! I'm Alicia</h1>
           <p>Computer science student interested in AI, systems, and impact-driven tech.</p>
+          <div class="social-links">
+            <img class = "icon-logo" src="../assets/email.webp" href = "mailto:alicia_s_wu@brown.edu">
+            <img class = "icon-logo" src="../assets/github_logo.png" href = "https://github.com/awu164">
+            <img class = "icon-logo" src="../assets/linkedin_logo.png" href = "https://www.linkedin.com/in/alicia-wu-a94245245/">
+          </div>
         </div>
       </div>
 
@@ -153,11 +216,20 @@
         </p>
       </div>
 
-      <div class="social-links">
-        <img class = "icon-logo" src="../assets/email.webp" href = "mailto:alicia_s_wu@brown.edu">
-        <img class = "icon-logo" src="../assets/github_logo.png" href = "https://github.com/awu164">
-        <img class = "icon-logo" src="../assets/linkedin_logo.png" href = "https://www.linkedin.com/in/alicia-wu-a94245245/">
+      <div class="slideshow">
+        <button class="nav left" aria-label="Previous photo">‹</button>
+
+        <div class="slide-frame">
+          <img id="slide-image" src="../assets/munnar.png" alt="Slideshow image">
+        </div>
+
+        <button class="nav right" aria-label="Next photo">›</button>
+
+        <div id="slide-caption" class="caption">
+          Visiting Munnar, a town in the Western Ghats mountain range in India’s Kerala state, August 2025.
+        </div>
       </div>
+
 
       <p>
         <a href="../index.html" class="back-link">← Back to home</a>
@@ -181,6 +253,49 @@
         }, 600);
       });
     }
+    
+    const slides = [
+      {
+        src: "../assets/newport.png",
+        caption: "Photo taken by Meredith Whitlock in Newport Rhode Island, May 2025. Featured in Brown's 2025 Geography Awareness Week: https://ibes.brown.edu/news-events/2025-geography-awareness-week"
+      },
+      {
+        src: "../assets/franconia.png",
+        caption: "Hiking Franconia Ridge Loop in the White Mountains, October 2025."
+      },
+      {
+        src: "../assets/pierce.png",
+        caption: "Hiking Mt. Pierce and Mt. Eisenhower in the White Mountains, October 2025."
+      },
+      {
+        src: "../assets/munnar.png",
+        caption: "Visiting Munnar, a town in the Western Ghats mountain range in India’s Kerala state, August 2025."
+      }
+    ];
+
+    let currentSlide = 0;
+    const imgEl = document.getElementById("slide-image");
+    const captionEl = document.getElementById("slide-caption");
+
+    function updateSlide(index) {
+      imgEl.style.opacity = 0;
+
+      setTimeout(() => {
+        imgEl.src = slides[index].src;
+        captionEl.textContent = slides[index].caption;
+        imgEl.style.opacity = 1;
+      }, 200);
+    }
+
+    document.querySelector(".nav.left").addEventListener("click", () => {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      updateSlide(currentSlide);
+    });
+
+    document.querySelector(".nav.right").addEventListener("click", () => {
+      currentSlide = (currentSlide + 1) % slides.length;
+      updateSlide(currentSlide);
+    });
   </script>
 </body>
 </html>
