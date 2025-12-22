@@ -26,7 +26,7 @@
     }
 
     /* ----- Main panel ----- */
-    .panel {
+    .personal-panel {
       width: 100%;
       max-width: 900px;
       background: rgba(255, 255, 255, 0.04);
@@ -34,6 +34,7 @@
       border-radius: 16px;
       padding: 48px;
       box-sizing: border-box;
+      font-family: "font-serif"
     }
 
     /* ----- Header area ----- */
@@ -128,9 +129,6 @@
       max-width: 500px;
       margin: 48px auto;
       text-align: center;
-    }
-
-    .slide-frame {
       overflow: hidden;
       border-radius: 14px;
     }
@@ -150,6 +148,7 @@
       top: 50%;
       transform: translateY(-50%);
       color: #fff;
+      background: transparent;
       font-size: 2rem;
       width: 44px;
       height: 44px;
@@ -157,7 +156,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background 0.2s ease, transform 0.2s ease;
       pointer-events: auto;
     }
 
@@ -176,7 +174,7 @@
 
 <body>
   <main class="page">
-    <div class="panel" font-family="font-serif">
+    <div class="personal-panel">
 
       <div class="about-header">
         <div class="profile-pic">
@@ -219,11 +217,7 @@
 
       <div class="slideshow">
         <button class="nav left" aria-label="Previous photo">‹</button>
-
-        <div class="slide-frame">
-          <img id="slide-image" src="../assets/munnar.png" alt="Slideshow image">
-        </div>
-
+        <img id="slide-image" src="../assets/munnar.png" alt="Slideshow image">
         <button class="nav right" aria-label="Next photo">›</button>
 
         <div id="slide-caption" class="caption">
@@ -263,8 +257,7 @@
           Featured in <a
             href="https://ibes.brown.edu/news-events/2025-geography-awareness-week"
             target="_blank"
-            rel="noopener noreferrer"
-          >
+            rel="noopener noreferrer">
             Brown's 2025 Geography Awareness Week
           </a>.
         `
@@ -292,7 +285,7 @@
 
       setTimeout(() => {
         imgEl.src = slides[index].src;
-        captionEl.textContent = slides[index].caption;
+        captionEl.innerHTML = slides[index].caption;
         imgEl.style.opacity = 1;
       }, 200);
     }
