@@ -34,7 +34,6 @@
       border-radius: 16px;
       padding: 48px;
       box-sizing: border-box;
-      font-family: "font-serif";
     }
 
     /* ----- Header area ----- */
@@ -150,8 +149,6 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(0,0,0,0.55);
-      border: 1px solid rgba(255,255,255,0.25);
       color: #fff;
       font-size: 2rem;
       width: 44px;
@@ -162,10 +159,6 @@
       justify-content: center;
       transition: background 0.2s ease, transform 0.2s ease;
       pointer-events: auto;
-    }
-
-    .nav:hover {
-      background: rgba(0,0,0,0.75);
     }
 
     .nav.left { left: -40px; }
@@ -183,7 +176,7 @@
 
 <body>
   <main class="page">
-    <div class="panel">
+    <div class="panel" font-family="font-serif">
 
       <div class="about-header">
         <div class="profile-pic">
@@ -265,7 +258,16 @@
     const slides = [
       {
         src: "../assets/newport.png",
-        caption: "Photo taken by Meredith Whitlock in Newport Rhode Island, May 2025. Featured in Brown's 2025 Geography Awareness Week: https://ibes.brown.edu/news-events/2025-geography-awareness-week"
+        caption: `
+          Photo taken by Meredith Whitlock in Newport, Rhode Island, May 2025.
+          Featured in <a
+            href="https://ibes.brown.edu/news-events/2025-geography-awareness-week"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Brown's 2025 Geography Awareness Week
+          </a>.
+        `
       },
       {
         src: "../assets/franconia.png",
